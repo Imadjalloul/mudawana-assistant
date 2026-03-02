@@ -631,7 +631,7 @@ body {
 }
 
 .modal-lg {
-  max-width: 580px;
+  max-width: 640px;
 }
 
 @keyframes modalIn {
@@ -735,7 +735,8 @@ body {
 .article-full-text {
   line-height: 2.2;
   font-size: 1rem;
-  white-space: pre-wrap;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 .article-meta {

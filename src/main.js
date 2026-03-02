@@ -470,6 +470,9 @@ function formatAIAnswer(text) {
     });
 
     formatted = formatted.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    // Clean up stray markdown markers
+    formatted = formatted.replace(/\*\*/g, '');
+    formatted = formatted.replace(/(?<!\w)\*(?!\w)/g, '');
 
     const lines = formatted.split('\n').filter(l => l.trim());
     let html = '';

@@ -9,8 +9,14 @@ let activeConvId = null;
 
 /* ── Init ── */
 async function init() {
-    const res = await fetch('./data/mudawana.json');
-    mudawanaData = await res.json();
+    try {
+        const res = await fetch('./data/mudawana.json');
+        if (!res.ok) throw new Error('تعذّر تحميل بيانات مدونة الأسرة');
+        mudawanaData = await res.json();
+    } catch (error) {
+        showLoadError(error.message);
+        return;
+    }
 
     loadConversations();
     setupSettings();
@@ -265,13 +271,30 @@ function setupModeChips() {
 
 /* ── Examples ── */
 function setupExamples() {
-    document.querySelectorAll('.example-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.getElementById('chatInput').value = btn.dataset.q;
-            document.getElementById('sendBtn').disabled = false;
-            sendMessage();
-        });
+    const messagesArea = document.getElementById('messagesArea');
+    if (messagesArea.dataset.examplesBound === 'true') return;
+
+    messagesArea.addEventListener('click', (event) => {
+        const button = event.target.closest('.example-btn');
+        if (!button) return;
+
+        document.getElementById('chatInput').value = button.dataset.q;
+        document.getElementById('sendBtn').disabled = false;
+        sendMessage();
     });
+
+    messagesArea.dataset.examplesBound = 'true';
+}
+
+function showLoadError(message) {
+    const area = document.getElementById('messagesArea');
+    area.innerHTML = `
+        <div class="welcome" id="welcomeScreen">
+            <div class="welcome-icon">⚠️</div>
+            <h2>وقع مشكل فتحميل البيانات</h2>
+            <p class="welcome-sub">${escapeHtml(message)}</p>
+            <p class="welcome-note">جرّب تحدّث الصفحة أو تأكد من وجود ملف البيانات.</p>
+        </div>`;
 }
 
 /* ── Mobile Sidebar ── */

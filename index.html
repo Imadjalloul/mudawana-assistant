@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مساعد مدونة الأسرة</title>
+  <meta name="description" content="مساعد دراسة وبحث في مدونة الأسرة المغربية — القانون رقم 70.03" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+
+<body>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h1 class="brand">📜 مساعد مدونة الأسرة</h1>
+        <button class="new-chat-btn" id="newChatBtn">+ محادثة جديدة</button>
+      </div>
+      <div class="chat-history" id="chatHistory"></div>
+      <div class="sidebar-footer">
+        <button class="sidebar-link" id="openSettingsBtn">⚙️ الإعدادات</button>
+        <div class="sidebar-disclaimer">مساعد دراسة وبحث — ليس استشارة قانونية</div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Mobile Header -->
+      <div class="mobile-header">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <span class="mobile-title">مساعد مدونة الأسرة</span>
+        <button class="settings-icon-btn" id="mobileSettingsBtn">⚙️</button>
+      </div>
+
+      <!-- Messages -->
+      <div class="messages-area" id="messagesArea">
+        <!-- Welcome Screen -->
+        <div class="welcome" id="welcomeScreen">
+          <div class="welcome-icon">📜</div>
+          <h2>مساعد مدونة الأسرة</h2>
+          <p class="welcome-sub">القانون رقم 70.03 بمثابة مدونة الأسرة المغربية</p>
+          <div class="welcome-examples">
+            <button class="example-btn" data-q="شنو هي شروط الزواج؟">شنو هي شروط الزواج؟</button>
+            <button class="example-btn" data-q="كيفاش كيتم الطلاق بالخلع؟">كيفاش كيتم الطلاق بالخلع؟</button>
+            <button class="example-btn" data-q="شكون لي عندو الحق في الحضانة؟">شكون لي عندو الحق في الحضانة؟</button>
+            <button class="example-btn" data-q="شنو هي حقوق المرأة في الميراث؟">شنو هي حقوق المرأة في الميراث؟</button>
+          </div>
+          <p class="welcome-note">⚖️ تذكر أن هذا ليس استشارة قانونية.</p>
+        </div>
+      </div>
+
+      <!-- Input Bar -->
+      <div class="input-bar">
+        <div class="input-bar-inner">
+          <div class="mode-switch">
+            <button class="mode-chip active" data-mode="brief" title="جواب مباشر وقصير">⚡ مختصر</button>
+            <button class="mode-chip" data-mode="think" title="تحليل شامل ومعمّق">🧠 مفصّل</button>
+          </div>
+          <div class="input-row">
+            <textarea id="chatInput" class="chat-input" placeholder="اطرح سؤالك حول مدونة الأسرة..."
+              rows="1"></textarea>
+            <button class="send-btn" id="sendBtn" disabled>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13" />
+                <path d="M22 2L15 22L11 13L2 9L22 2Z" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Settings Modal -->
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>الإعدادات</h2>
+        <button class="modal-close" id="closeSettings">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="setting-label">مفتاح Gemini API</label>
+        <input type="password" id="apiKeyInput" class="setting-input" placeholder="أدخل المفتاح هنا..." />
+        <p class="setting-hint">
+          احصل على مفتاح مجاني من
+          <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>
+          — 15 طلب/دقيقة مجانًا
+        </p>
+        <button id="saveApiKey" class="save-btn">حفظ المفتاح</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Modal -->
+  <div class="modal-overlay" id="articleModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h2 id="articleModalTitle"></h2>
+        <button class="modal-close" id="closeArticle">✕</button>
+      </div>
+      <div class="modal-body" id="articleModalBody"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
